@@ -26,7 +26,7 @@ export LANG=$1
 export SHOW="python $LIBDIR/enigma2/python/Plugins/Extensions/BackupSuite/message.pyo $LANG"
 export HARDDISK=0
 echo -n $YELLOW
-$SHOW "message43"   	#echo "Full back-up to the MultiMediaCard"
+$SHOW "message43"   	#echo "Full backup to the MultiMediaCard"
 FREESIZE_0=0
 TOTALSIZE_0=0
 MEDIA=0

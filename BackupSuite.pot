@@ -16,31 +16,31 @@ msgstr ""
 msgid "Make a backup or restore a backup"
 msgstr ""
 
-msgid "Full back-up on HDD"
+msgid "Full backup on HDD"
 msgstr ""
 
 msgid ""
-"Do you want to make an USB-back-up image on HDD? \n"
+"Do you want to make an USB-backup image on HDD? \n"
 "\n"
 "This only takes a few minutes and is fully automatic.\n"
 msgstr ""
 
-msgid "Full back-up to USB"
+msgid "Full backup to USB"
 msgstr ""
 
 msgid ""
-"Do you want to make a back-up on USB?\n"
+"Do you want to make a backup on USB?\n"
 "\n"
 "This only takes a few minutes depending on the used filesystem and is fully automatic.\n"
 "\n"
 "Make sure you first insert an USB flash drive before you select Yes."
 msgstr ""
 
-msgid "Full back-up on MMC"
+msgid "Full backup on MMC"
 msgstr ""
 
 msgid ""
-"Do you want to make an USB-back-up image on MMC? \n"
+"Do you want to make an USB-backup image on MMC? \n"
 "\n"
 "This only takes a few minutes and is fully automatic.\n"
 msgstr ""
@@ -48,7 +48,7 @@ msgstr ""
 msgid "No supported receiver found!"
 msgstr ""
 
-msgid "BACK-UP TOOL, FOR MAKING A COMPLETE BACK-UP"
+msgid "BACKUP TOOL, FOR MAKING A COMPLETE BACKUP"
 msgstr ""
 
 msgid "Please be patient, a backup will now be made, this will take about: "
@@ -87,7 +87,7 @@ msgstr ""
 msgid "available "
 msgstr ""
 
-msgid "There is a valid USB-flashdrive detected in one of the USB-ports, therefore an extra copy of the back-up image will now be copied to that USB-flashdrive."
+msgid "There is a valid USB-flashdrive detected in one of the USB-ports, therefore an extra copy of the backup image will now be copied to that USB-flashdrive."
 msgstr ""
 
 msgid "This only takes about 20 seconds....."
@@ -96,7 +96,7 @@ msgstr ""
 msgid "Backup finished and copied to your USB-flashdrive."
 msgstr ""
 
-msgid "Full back-up to the harddisk"
+msgid "Full backup to the harddisk"
 msgstr ""
 
 msgid "There is NO valid USB-stick found, so I've got nothing to do."
@@ -105,7 +105,7 @@ msgstr ""
 msgid "PLEASE READ THIS:"
 msgstr ""
 
-msgid "To back-up directly to the USB-stick, the USB-stick MUST contain a file with the name:"
+msgid "To backup directly to the USB-stick, the USB-stick MUST contain a file with the name:"
 msgstr ""
 
 msgid "backupstick or"
@@ -114,13 +114,13 @@ msgstr ""
 msgid "backupstick.txt"
 msgstr ""
 
-msgid "If you place an USB-stick containing this file then the back-up will be automatically made onto the USB-stick and can be used to restore the current image if necessary."
+msgid "If you place an USB-stick containing this file then the backup will be automatically made onto the USB-stick and can be used to restore the current image if necessary."
 msgstr ""
 
 msgid "The program will exit now."
 msgstr ""
 
-msgid "Full back-up direct to USB"
+msgid "Full backup direct to USB"
 msgstr ""
 
 msgid "The content of the folder is:"
@@ -138,10 +138,10 @@ msgstr ""
 msgid "KB per second"
 msgstr ""
 
-msgid "Most likely this back-up can't be restored because of it's size, it's simply too big to restore. This is a limitation of the bootloader not of the back-up or the BackupSuite."
+msgid "Most likely this backup can't be restored because of it's size, it's simply too big to restore. This is a limitation of the bootloader not of the backup or the BackupSuite."
 msgstr ""
 
-msgid "There COULD be a problem with restoring this back-up because the size of the back-up comes close to the maximum size. This is a limitation of the bootloader not of the back-up or the BackupSuite."
+msgid "There COULD be a problem with restoring this backup because the size of the backup comes close to the maximum size. This is a limitation of the bootloader not of the backup or the BackupSuite."
 msgstr ""
 
 msgid "* * * WARNING * * *"
@@ -150,7 +150,7 @@ msgstr ""
 msgid "Not enough free space on "
 msgstr ""
 
-msgid " to make a back-up!"
+msgid " to make a backup!"
 msgstr ""
 
 msgid " MB available space"
@@ -159,16 +159,13 @@ msgstr ""
 msgid " MB needed space"
 msgstr ""
 
-msgid "The program will abort, please try another medium with more free space to create your back-up."
+msgid "The program will abort, please try another medium with more free space to create your backup."
 msgstr ""
 
-msgid "Full back-up to the MultiMediaCard"
+msgid "Full backup to the MultiMediaCard"
 msgstr ""
 
 msgid "is not executable..."
-msgstr ""
-
-msgid "Using your own custom lookuptable.txt from the folder /etc"
 msgstr ""
 
 msgid "Version unknown, probably not installed the right way."
@@ -177,7 +174,7 @@ msgstr ""
 msgid "not installed yet, now installing"
 msgstr ""
 
-msgid "Probably you are trying to make the back-up in flash memory"
+msgid "Probably you are trying to make the backup in flash memory"
 msgstr ""
 
 msgid "No additional USB-stick found to copy an extra backup"

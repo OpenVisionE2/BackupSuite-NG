@@ -29,7 +29,7 @@ def message01():
 	return 
 	
 def message02():
-	print(_("BACK-UP TOOL, FOR MAKING A COMPLETE BACK-UP"))
+	print(_("BACKUP TOOL, FOR MAKING A COMPLETE BACKUP"))
 	return
 		
 def message03():
@@ -81,7 +81,7 @@ def message16():
 	return 
 
 def message17():
-	print(_("There is a valid USB-flashdrive detected in one of the USB-ports, therefore an extra copy of the back-up image will now be copied to that USB-flashdrive."))
+	print(_("There is a valid USB-flashdrive detected in one of the USB-ports, therefore an extra copy of the backup image will now be copied to that USB-flashdrive."))
 	print(_("This only takes about 20 seconds....."))
 	return
 
@@ -90,23 +90,23 @@ def message19():
 	return
 
 def message20():
-	sys.stdout.write(_("Full back-up to the harddisk"))
+	sys.stdout.write(_("Full backup to the harddisk"))
 	return
 
 def message21():
 	print(_("There is NO valid USB-stick found, so I've got nothing to do."))
 	print(" ")
 	print(_("PLEASE READ THIS:"))
-	print(_("To back-up directly to the USB-stick, the USB-stick MUST contain a file with the name:"))
+	print(_("To backup directly to the USB-stick, the USB-stick MUST contain a file with the name:"))
 	print(_("backupstick or"))
 	print(_("backupstick.txt"))
 	print(" ")
-	print(_("If you place an USB-stick containing this file then the back-up will be automatically made onto the USB-stick and can be used to restore the current image if necessary."))
+	print(_("If you place an USB-stick containing this file then the backup will be automatically made onto the USB-stick and can be used to restore the current image if necessary."))
 	print(_("The program will exit now."))
 	return
 
 def message22():
-	sys.stdout.write(_("Full back-up direct to USB"))
+	sys.stdout.write(_("Full backup direct to USB"))
 	return
 
 def message23():
@@ -131,11 +131,11 @@ def message27():
 	return 
 
 def message28():
-	print(_("Most likely this back-up can't be restored because of it's size, it's simply too big to restore. This is a limitation of the bootloader not of the back-up or the BackupSuite."))
+	print(_("Most likely this backup can't be restored because of it's size, it's simply too big to restore. This is a limitation of the bootloader not of the backup or the BackupSuite."))
 	return
 
 def message29():
-	print(_("There COULD be a problem with restoring this back-up because the size of the back-up comes close to the maximum size. This is a limitation of the bootloader not of the back-up or the BackupSuite."))
+	print(_("There COULD be a problem with restoring this backup because the size of the backup comes close to the maximum size. This is a limitation of the bootloader not of the backup or the BackupSuite."))
 	return
 	
 def message30():
@@ -144,7 +144,7 @@ def message30():
 	return
 	
 def message31():
-	print(_(" to make a back-up!"))
+	print(_(" to make a backup!"))
 	return
 	
 def message32():
@@ -156,7 +156,7 @@ def message33():
 	return
 	
 def message34():
-	print(_("The program will abort, please try another medium with more free space to create your back-up."))
+	print(_("The program will abort, please try another medium with more free space to create your backup."))
 	return
 
 def message35():
@@ -164,7 +164,7 @@ def message35():
 	return
 
 def message36():
-	print(_("Using your own custom lookuptable.txt from the folder /etc"))
+	print(_("Reserved."))
 	return
 
 def message37():
@@ -176,7 +176,7 @@ def message38():
 	return
 
 def message39():
-	print(_("Probably you are trying to make the back-up in flash memory"))
+	print(_("Probably you are trying to make the backup in flash memory"))
 	return
 
 def message40():
@@ -192,7 +192,7 @@ def message42():
 	return
 
 def message43():
-	sys.stdout.write(_("Full back-up to the MultiMediaCard"))
+	sys.stdout.write(_("Full backup to the MultiMediaCard"))
 	return
 
 globals()[sys.argv[2]]()

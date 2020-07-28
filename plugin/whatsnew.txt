@@ -450,7 +450,7 @@ It is for me near impossible to add all enigma2 receivers on the market, just by
 Therefore I added the ability to maintain your own lookuptable.txt in /etc.
 If you want to add a receiver which isn't supported by me, just copy the lookuptable.txt to /etc and edit this table with the right parameters.
 The file lookuptable.txt in /etc is safe for updates so you can build your own list with supported receivers.
-If you place the file lookuptable.txt in /etc this file will be the one that's used to create the back-up's.
+If you place the file lookuptable.txt in /etc this file will be the one that's used to create the backup's.
 If there is no file in /etc then the standard file supplied by the BackupSuite is used.
 If you want a certain receiver to be supported just ask the image maker to add a lookuptable.txt in the folder /etc or ask for the parameters to be used.
 
@@ -459,7 +459,7 @@ Git 86
 
 Git 85
 - Added support for the VU+ Solo 4K. Beware: this is a very early test, the plugin still needs some tidying up.
-Don't try to flash the made back-up of the Solo 4k with the built in OFGWRITE, it needs an update to be able to flash the Solo 4K
+Don't try to flash the made backup of the Solo 4k with the built in OFGWRITE, it needs an update to be able to flash the Solo 4K
 Reverted the truncating of the kernelpartition
 
 Git 84
@@ -477,7 +477,7 @@ Git 81
 - Added support for Xsarius Fusion HD (very experimental, use with care!)
 
 Git 80
-- Temporary measure: bail out if the receiver is a VU+ Solo 4K until more is known what the requirements are to make a working back-up
+- Temporary measure: bail out if the receiver is a VU+ Solo 4K until more is known what the requirements are to make a working backup
 Lookuptable expanded with the entry Solo4K
 
 Git 78 & 79
@@ -487,7 +487,7 @@ Git 77
 - Removed some obsolete code, this were some remains of experiments which I overlooked
 
 Git 76
-- Made some alterations in the way a back-up is made: if a backup is made onto the harddisk there is no longer a flashable copy made in the root of the harddisk. The backup is only stored in the folder "fullbackup_<type> etc.
+- Made some alterations in the way a backup is made: if a backup is made onto the harddisk there is no longer a flashable copy made in the root of the harddisk. The backup is only stored in the folder "fullbackup_<type> etc.
 If the backup is made onto an USB-stick then the copy is made in the root and a copy in the folder fullbackup_<type> etc.
 
 Git 75
