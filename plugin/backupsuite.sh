@@ -395,8 +395,8 @@ else
 fi
 ############################ ASSEMBLING THE IMAGE #############################
 make_folders
-mv "$WORKDIR/$ROOTNAME" "$MAINDEST/$ROOTNAME"
-mv "$WORKDIR/$KERNELNAME" "$MAINDEST/$KERNELNAME"
+mv -f "$WORKDIR/$ROOTNAME" "$MAINDEST/$ROOTNAME"
+mv -f "$WORKDIR/$KERNELNAME" "$MAINDEST/$KERNELNAME"
 if [ $ACTION = "no" ] ; then
 	echo "rename this file to 'force' to force an update without confirmation" > "$MAINDEST/noforce";
 elif [ $ACTION = "reboot" ] ; then
@@ -491,16 +491,16 @@ echo "--------------------------------------------" >> $LOGFILE
 opkg list-installed >> $LOGFILE
 ######################## COPY LOGFILE TO MAINDESTINATION ######################
 echo -n $WHITE
-cp $LOGFILE "$MAINDEST"
+cp -f $LOGFILE "$MAINDEST"
 if  [ $HARDDISK != 1 ]; then
-	cp $LOGFILE "$MEDIA$EXTR1"
-	mv "$MEDIA$EXTR1$FOLDER"/imageversion "$MEDIA$EXTR1"
+	cp -f $LOGFILE "$MEDIA$EXTR1"
+	mv -f "$MEDIA$EXTR1$FOLDER"/imageversion "$MEDIA$EXTR1"
 else
 	mv -f "$MAINDEST"/BackupSuite.log "$MEDIA$EXTR1"
-	cp "$MAINDEST"/imageversion "$MEDIA$EXTR1"
+	cp -f "$MAINDEST"/imageversion "$MEDIA$EXTR1"
 fi
 if [ "$TARGET" != "XX" ] ; then
-	cp $LOGFILE "$TARGET$FOLDER"
+	cp -f $LOGFILE "$TARGET$FOLDER"
 fi
 exit
 ############### END OF PROGRAMM ################

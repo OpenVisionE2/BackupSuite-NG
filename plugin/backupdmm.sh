@@ -352,8 +352,8 @@ fi
 $BZIP2 $WORKDIR/rootfs.tar
 ############################ ASSEMBLING THE IMAGE #############################
 make_folders
-mv "$WORKDIR/$ROOTNAME" "$MAINDEST/$ROOTNAME"
-mv "$WORKDIR/$KERNELNAME" "$MAINDEST/$KERNELNAME"
+mv -f "$WORKDIR/$ROOTNAME" "$MAINDEST/$ROOTNAME"
+mv -f "$WORKDIR/$KERNELNAME" "$MAINDEST/$KERNELNAME"
 image_version > "$MAINDEST/imageversion" 
 if  [ $HARDDISK != 1 ]; then
 	mkdir -p "$EXTRA"
@@ -430,16 +430,16 @@ echo "--------------------------------------------" >> $LOGFILE
 opkg list-installed >> $LOGFILE
 ######################## COPY LOGFILE TO MAINDESTINATION ######################
 echo -n $WHITE
-cp $LOGFILE "$MAINDEST"
+cp -f $LOGFILE "$MAINDEST"
 if  [ $HARDDISK != 1 ]; then
-	cp $LOGFILE "$MEDIA$EXTR1"
-	mv "$MEDIA$EXTR1$FOLDER"/imageversion "$MEDIA$EXTR1"
+	cp -f $LOGFILE "$MEDIA$EXTR1"
+	mv -f "$MEDIA$EXTR1$FOLDER"/imageversion "$MEDIA$EXTR1"
 else
 	mv -f "$MAINDEST"/BackupSuite.log "$MEDIA$EXTR1"
-	cp "$MAINDEST"/imageversion "$MEDIA$EXTR1"
+	cp -f "$MAINDEST"/imageversion "$MEDIA$EXTR1"
 fi
 if [ "$TARGET" != "XX" ] ; then
-	cp $LOGFILE "$TARGET$FOLDER"
+	cp -f $LOGFILE "$TARGET$FOLDER"
 fi
 ############### END OF PROGRAMM ################
 }
@@ -584,16 +584,16 @@ echo "--------------------------------------------" >> $LOGFILE
 opkg list-installed >> $LOGFILE
 ######################## COPY LOGFILE TO MAINDESTINATION ######################
 echo -n $WHITE
-cp $LOGFILE "$MAINDEST"
+cp -f $LOGFILE "$MAINDEST"
 if  [ $HARDDISK != 1 ]; then
-	cp $LOGFILE "$MEDIA"
-	mv "$MEDIA$FOLDER"/imageversion "$MEDIA"
+	cp -f $LOGFILE "$MEDIA"
+	mv -f "$MEDIA$FOLDER"/imageversion "$MEDIA"
 else
 	mv -f "$MAINDEST"/BackupSuite.log "$MEDIA"
-	cp "$MAINDEST"/imageversion "$MEDIA"
+	cp -f "$MAINDEST"/imageversion "$MEDIA"
 fi
 if [ "$TARGET" != "XX" ] ; then
-	cp $LOGFILE "$TARGET$FOLDER"
+	cp -f $LOGFILE "$TARGET$FOLDER"
 fi
 ############### END OF PROGRAMM ################
 }
@@ -861,7 +861,7 @@ TSTAMP="$(date "+%Y-%m-%d-%Hh%Mm")"
 rm -rf "$MAINDEST" 2>/dev/null
 mkdir -p "$MAINDEST"
 NFI="$MAINDEST/$TSTAMP-$SEARCH.nfi"
-mv "$SBI/backup.nfi" "$NFI"
+mv -f "$SBI/backup.nfi" "$NFI"
 log "Backup image created $NFI"
 log "$(du -h $NFI)"
 if [ -z "$CREATE_ZIP" ] ; then
