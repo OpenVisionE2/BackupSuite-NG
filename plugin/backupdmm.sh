@@ -222,6 +222,9 @@ if [ -f /etc/modules-load.d/dreambox-dvb-modules-dm*.conf ] || [ -f /etc/modules
 		log "Brand: $SHOWNAME"
 		MTDPLACE=$( cat /etc/openvision/mtdkernel )
 		log "MTD kernel: $MTDPLACE"
+		ARCHITECTURE=$( cat /etc/openvision/architecture )
+		log "Architecture: $ARCHITECTURE"
+		SHORTARCH=$( echo "$ARCHITECTURE" | cut -c1-3 )
 	else
 		echo $RED
 		$SHOW "message01" 2>&1 | tee -a $LOGFILE # No supported receiver found!
@@ -326,12 +329,17 @@ fi
 log $LINE
 $SHOW "message07" 2>&1 | tee -a $LOGFILE			# Create: kerneldump
 log "Kernel resides on /dev/$MTDPLACE" 					# Just for testing purposes
-$NANDDUMP /dev/$MTDPLACE -qf "$WORKDIR/$KERNELNAME"
+if [ $SHORTARCH = "cor" -o $SHORTARCH = "arm" -o $SHORTARCH = "aar" ] ; then
+	dd if=/dev/$MTDPLACE of=$WORKDIR/$KERNELNAME
+else
+	$NANDDUMP /dev/$MTDPLACE -qf "$WORKDIR/$KERNELNAME"	
+fi
 if [ -f "$WORKDIR/$KERNELNAME" ] ; then
 	echo -n "Kernel dumped  :"  >> $LOGFILE
 	ls $LS1 "$WORKDIR/$KERNELNAME" | sed 's/-r.*   1//' >> $LOGFILE
 else
 	log "$WORKDIR/$KERNELNAME NOT FOUND"
+	big_fail
 fi
 #############################  MAKING ROOT.UBI(FS) ############################
 $SHOW "message06a" 2>&1 | tee -a $LOGFILE		#Create: root.ubifs
