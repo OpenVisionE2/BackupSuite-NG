@@ -196,7 +196,7 @@ else
 		log "Thanks GOD it's Open Vision"
 		SEARCH=$( cat /etc/openvision/model )
 		log "Model: $SEARCH"
-		PLATFORM=$( cat /etc/openvision/platfom )
+		PLATFORM=$( cat /etc/openvision/platform )
 		log "Platform: $PLATFORM"
 		KERNELNAME=$( cat /etc/openvision/kernelfile )
 		log "Kernel file: $KERNELNAME"
@@ -208,7 +208,7 @@ else
 		log "Root file: $ROOTNAME"
 		ACTION=$( cat /etc/openvision/forcemode )
 		log "Force: $ACTION"
-		FOLDER=$( cat /etc/openvision/imagedir )
+		FOLDER=/$( cat /etc/openvision/imagedir )
 		log "Image folder: $FOLDER"
 		SHOWNAME=$( cat /etc/openvision/brand )
 		log "Brand: $SHOWNAME"
@@ -340,14 +340,13 @@ fi
 ############################## MAKING KERNELDUMP ##############################
 log $LINE
 $SHOW "message07" 2>&1 | tee -a $LOGFILE			# Create: kerneldump
-log "Kernel resides on $MTDPLACE" 					# Just for testing purposes
+log "Kernel resides on /dev/$MTDPLACE" 					# Just for testing purposes
 $NANDDUMP /dev/$MTDPLACE -qf "$WORKDIR/$KERNELNAME"
 if [ -f "$WORKDIR/$KERNELNAME" ] ; then
 	echo -n "Kernel dumped  :"  >> $LOGFILE
 	ls $LS1 "$WORKDIR/$KERNELNAME" | sed 's/-r.*   1//' >> $LOGFILE
 else
 	log "$WORKDIR/$KERNELNAME NOT FOUND"
-	big_fail
 fi
 #############################  MAKING ROOT.UBI(FS) ############################
 $SHOW "message06a" 2>&1 | tee -a $LOGFILE		#Create: root.ubifs

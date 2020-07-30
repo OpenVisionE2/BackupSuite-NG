@@ -1,6 +1,16 @@
 Changelog
 =========
 
+Git 497-510
+- New generation of Backup Suite without lookuptable.txt, findkerneldevice.sh and findkerneldevice.py for Open Vision
+We check things better and faster in OV and it's not my duty to support all images so sorry and EOL for master branch.
+Open Vision branding provides almost evey information we need and the new generation depends on it.
+- BackupSuite huge cleanup.
+- Maxytec Multibox Plus support
+- Python 3 compatible.
+- Get rid of dev boxes: cc1, v8plus, bcm7358, vp7358ci
+- Turkish translation updated, Thanks to https://github.com/audi06
+
 Git 485-496
 - Use boxbranding when enigma getBoxType isn't available, Thanks to https://github.com/s3n0
 - Get rid of dinobot u42/u43 duplicates
