@@ -239,7 +239,7 @@ dm9x0_situation()
 {
 log "Found $SEARCH, bz2 mode"
 EXTR1="/fullbackup_$SEARCH/$DATE"
-EXTRA="$MEDIA$EXTR1"
+EXTRA="$MEDIA$EXTR1$FOLDER"
 if  [ $HARDDISK = 1 ]; then
 	MAINDEST="$MEDIA$EXTR1$FOLDER"
 	mkdir -p "$MAINDEST"
@@ -433,7 +433,9 @@ echo -n $WHITE
 cp -f $LOGFILE "$MAINDEST"
 if  [ $HARDDISK != 1 ]; then
 	cp -f $LOGFILE "$MEDIA$EXTR1"
-	mv -f "$MEDIA$EXTR1$FOLDER"/imageversion "$MEDIA$EXTR1"
+	if [ -f "$MEDIA$EXTR1$FOLDER/imageversion" ]; then
+		mv -f "$MEDIA$EXTR1$FOLDER"/imageversion "$MEDIA$EXTR1"
+	fi
 else
 	mv -f "$MAINDEST"/BackupSuite.log "$MEDIA$EXTR1"
 	cp -f "$MAINDEST"/imageversion "$MEDIA$EXTR1"
