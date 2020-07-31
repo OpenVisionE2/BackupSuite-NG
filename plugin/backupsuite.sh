@@ -83,7 +83,7 @@ $SHOW "message15" 2>&1 | tee -a $LOGFILE # Image creation FAILED!
 echo $WHITE
 exit 0
 }
-############################ DEFINE IMAGE_VERSION #############################
+############################ DEFINE IMAGE VERSION #############################
 image_version()
 {
 echo "Backup = $BACKUPDATE"
@@ -217,6 +217,9 @@ else
 		ARCHITECTURE=$( cat /etc/openvision/architecture )
 		log "Architecture: $ARCHITECTURE"
 		SHORTARCH=$( echo "$ARCHITECTURE" | cut -c1-3 )
+		SOCFAMILY=$( cat /etc/openvision/socfamily )
+		log "SoC family: $SOCFAMILY"
+		SHORTSOC=$( echo "$SOCFAMILY" | cut -c1-4 )
 	else
 		echo $RED
 		$SHOW "message01" 2>&1 | tee -a $LOGFILE # No supported receiver found!
@@ -398,12 +401,21 @@ make_folders
 mv -f "$WORKDIR/$ROOTNAME" "$MAINDEST/$ROOTNAME"
 mv -f "$WORKDIR/$KERNELNAME" "$MAINDEST/$KERNELNAME"
 if [ $ACTION = "no" ] ; then
-	echo "rename this file to 'force' to force an update without confirmation" > "$MAINDEST/noforce";
-elif [ $ACTION = "reboot" ] ; then
-	echo "rename this file to 'force.update' to force an update without confirmation" > "$MAINDEST/reboot.update"
+	if [ $SHORTSOC = "hisi" ] ; then
+		echo "Rename unforce_$SEARCH.txt to force_$SEARCH.txt and move it to the root of your usb-stick" > "$MAINDEST/unforce_$SEARCH.txt";
+	elif [ $SHOWNAME = "vuplus" ] ; then
+		echo "rename this file to 'force.update' to force an update without confirmation" > "$MAINDEST/reboot.update"
+	else
+		echo "rename this file to 'force' to force an update without confirmation" > "$MAINDEST/noforce";
+	fi
 elif [ $ACTION = "yes" ] ; then
-	echo "rename this file to 'force.update' to be able to flash this backup" > "$MAINDEST/noforce.update"
-	echo "Rename the file in the folder /vuplus/$SEARCH/noforce.update to /vuplus/$SEARCH/force.update to flash this image"
+	if [ $SHORTSOC = "hisi" ] ; then
+		echo "Rename force_$SEARCH.txt to unforce_$SEARCH.txt and move it to the root of your usb-stick" > "$MAINDEST/force_$SEARCH.txt";
+	elif [ $SHOWNAME = "vuplus" ] ; then
+		echo "rename this file to 'reboot.update' to not force an update without confirmation" > "$MAINDEST/force.update"
+	else
+		echo "rename this file to 'noforce' to not force an update without confirmation" > "$MAINDEST/force";
+	fi
 fi
 image_version > "$MAINDEST/imageversion"
 if [ $PLATFORM = "zgemmahisi3798mv200" -o $PLATFORM = "zgemmahisi3716mv430" ] ; then

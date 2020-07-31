@@ -83,7 +83,7 @@ $SHOW "message15" 2>&1 | tee -a $LOGFILE # Image creation FAILED!
 echo $WHITE
 exit 0
 }
-############################ DEFINE IMAGE_VERSION #############################
+############################ DEFINE IMAGE VERSION #############################
 image_version()
 {
 echo "Backup = $BACKUPDATE"
