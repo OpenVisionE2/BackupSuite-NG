@@ -1,8 +1,8 @@
 BackupSuite [![Build Status](https://travis-ci.org/OpenVisionE2/BackupSuite.svg?branch=develop)](https://travis-ci.org/OpenVisionE2/BackupSuite) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ===========
-Created by Pedro Newbie
+Created by Pedro Newbie revamped by Persian Prince
 
-Backup Suite for Open Vision
+Backup Suite (new generation) for Open Vision (won't work on other images)
 
 Ready bitbake recipe:
 
