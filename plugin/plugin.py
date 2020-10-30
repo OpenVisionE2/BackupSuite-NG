@@ -102,7 +102,7 @@ try:
 	reader = XMLHelpReader(resolveFilename(SCOPE_PLUGINS, "Extensions/BackupSuite/mphelp.xml"))
 	backupsuiteHelp = registerHelp(*reader)
 except Exception as e:
-	print("[BackupSuite] Unable to initialize MPHelp:", e,"- Help not available!")
+	print("[BackupSuite] Unable to initialize MPHelp:", e, "- Help not available!")
 	backupsuiteHelp = None
 
 class BackupStart(Screen):
@@ -141,13 +141,13 @@ class BackupStart(Screen):
 		self.setTitle(self.setup_title)
 
 	def confirmhdd(self):
-		self.session.openWithCallback(self.backuphdd, MessageBox, _("Do you want to make an USB-backup image on HDD? \n\nThis only takes a few minutes and is fully automatic.\n") , MessageBox.TYPE_YESNO, timeout = 20, default = True)
+		self.session.openWithCallback(self.backuphdd, MessageBox, _("Do you want to make an USB-backup image on HDD? \n\nThis only takes a few minutes and is fully automatic.\n"), MessageBox.TYPE_YESNO, timeout = 20, default = True)
 
 	def confirmusb(self):
-		self.session.openWithCallback(self.backupusb, MessageBox, _("Do you want to make a backup on USB?\n\nThis only takes a few minutes depending on the used filesystem and is fully automatic.\n\nMake sure you first insert an USB flash drive before you select Yes.") , MessageBox.TYPE_YESNO, timeout = 20, default = True)
+		self.session.openWithCallback(self.backupusb, MessageBox, _("Do you want to make a backup on USB?\n\nThis only takes a few minutes depending on the used filesystem and is fully automatic.\n\nMake sure you first insert an USB flash drive before you select Yes."), MessageBox.TYPE_YESNO, timeout = 20, default = True)
 
 	def confirmmmc(self):
-		self.session.openWithCallback(self.backupmmc, MessageBox, _("Do you want to make an USB-backup image on MMC? \n\nThis only takes a few minutes and is fully automatic.\n") , MessageBox.TYPE_YESNO, timeout = 20, default = True)
+		self.session.openWithCallback(self.backupmmc, MessageBox, _("Do you want to make an USB-backup image on MMC? \n\nThis only takes a few minutes and is fully automatic.\n"), MessageBox.TYPE_YESNO, timeout = 20, default = True)
 
 	def showHelp(self):
 		from plugin import backupsuiteHelp
@@ -163,7 +163,7 @@ class BackupStart(Screen):
 		self.session.open(FlashImageConfig, curdir, files)
 
 	def cancel(self):
-		self.close(False,self.session)
+		self.close(False, self.session)
 
 	def keyInfo(self):
 		self.session.open(WhatisNewInfo)
@@ -178,21 +178,21 @@ class BackupStart(Screen):
 			self.writeEnigma2VersionFile()
 			text = _('Full backup on HDD')
 			cmd = backupCommandHDD()
-			self.session.openWithCallback(self.consoleClosed,Console,text,[cmd])
+			self.session.openWithCallback(self.consoleClosed, Console, text, [cmd])
 
 	def backupusb(self, ret = False ):
 		if (ret == True):
 			self.writeEnigma2VersionFile()
 			text = _('Full backup to USB')
 			cmd = backupCommandUSB()
-			self.session.openWithCallback(self.consoleClosed,Console,text,[cmd])
+			self.session.openWithCallback(self.consoleClosed, Console, text, [cmd])
 
 	def backupmmc(self, ret = False ):
 		if (ret == True):
 			self.writeEnigma2VersionFile()
 			text = _('Full backup on MMC')
 			cmd = backupCommandMMC()
-			self.session.openWithCallback(self.consoleClosed,Console,text,[cmd])
+			self.session.openWithCallback(self.consoleClosed, Console, text, [cmd])
 
 	def consoleClosed(self, answer=None):
 		return
@@ -283,7 +283,7 @@ class FlashImageConfig(Screen):
 		return False
 
 	def ForceMode(self):
-		if getMachineBuild() in ("zgemmahisi3798mv200","zgemmahisi3716mv430"):
+		if getMachineBuild() in ("zgemmahisi3798mv200", "zgemmahisi3716mv430"):
 			return True
 		return False
 
@@ -438,7 +438,7 @@ class FlashImageConfig(Screen):
 					message += _('Please: DO NOT reboot your STB and turn off the power.\n')
 					message += _('The image or kernel will be flashing and auto booted in few minutes.\n')
 					message += "'"
-			self.session.open(Console, text,[message, cmd])
+			self.session.open(Console, text, [message, cmd])
 
 	def keyRed(self):
 		self.close()
@@ -464,7 +464,7 @@ class FlashImageConfig(Screen):
 			filename = self.filelist.getFilename()
 			if dirname and filename:
 				try:
-					os.system('unzip -o %s%s -d %s'%(dirname,filename,dirname))
+					os.system('unzip -o %s%s -d %s'%(dirname, filename, dirname))
 					self.filelist.refresh()
 				except:
 					pass
