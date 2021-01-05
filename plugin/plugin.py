@@ -315,8 +315,8 @@ class FlashImageConfig(Screen):
 				if filename and filename.endswith(".zip"):
 					self["key_yellow"].setText(_("Unzip"))
 			elif self.filelist.canDescent() and file_name != '' and file_name != '/':
-				self["key_green"].setText(_("Run flash"))
 				if os.path.isfile(file_name + LOGFILE) and os.path.isfile(file_name + VERSIONFILE):
+					self["key_green"].setText(_("Run flash"))
 					self["key_yellow"].setText(_("Backup info"))
 					self["key_blue"].setText(_("Delete"))
 		except:
