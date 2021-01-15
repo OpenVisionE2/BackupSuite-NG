@@ -188,7 +188,7 @@ checkbinary $UBINIZE
 echo -n $WHITE
 #############################################################################
 # TEST IF RECEIVER IS SUPPORTED #
-if [ -f /etc/modules-load.d/dreambox-dvb-modules-dm*.conf ] || [ -f /etc/modules-load.d/10-dreambox-dvb-modules-dm*.conf ] ; then
+if [ -f /etc/modules-load.d/*dreambox-dvb-modules*.conf ] ; then
 	log "It's a dreambox! Not compatible with this script."
 	exit 1
 else
