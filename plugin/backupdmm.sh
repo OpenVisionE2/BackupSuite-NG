@@ -600,7 +600,7 @@ fi
 ############### END OF PROGRAMM ################
 }
 ######################## DM520,DM7080,DM820 Situation ########################
-if [ $PLATFORM = "dm3gen" ] ; then
+if [ $PLATFORM = "dm3gen" -o $PLATFORM = "dmamlogic" ] ; then
 	dm520_dm7080_dm820_situation
 fi
 ########################### Old Dreambox Situation ###########################
