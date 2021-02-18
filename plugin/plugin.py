@@ -106,7 +106,7 @@ except Exception as e:
 	backupsuiteHelp = None
 
 class BackupStart(Screen):
-	def __init__(self, session, args = 0):
+	def __init__(self, session, args=0):
 		try:
 			sz_w = getDesktop(0).size().width()
 		except:
@@ -141,13 +141,13 @@ class BackupStart(Screen):
 		self.setTitle(self.setup_title)
 
 	def confirmhdd(self):
-		self.session.openWithCallback(self.backuphdd, MessageBox, _("Do you want to make an USB-backup image on HDD? \n\nThis only takes a few minutes and is fully automatic.\n"), MessageBox.TYPE_YESNO, timeout = 20, default = True)
+		self.session.openWithCallback(self.backuphdd, MessageBox, _("Do you want to make an USB-backup image on HDD? \n\nThis only takes a few minutes and is fully automatic.\n"), MessageBox.TYPE_YESNO, timeout=20, default=True)
 
 	def confirmusb(self):
-		self.session.openWithCallback(self.backupusb, MessageBox, _("Do you want to make a backup on USB?\n\nThis only takes a few minutes depending on the used filesystem and is fully automatic.\n\nMake sure you first insert an USB flash drive before you select Yes."), MessageBox.TYPE_YESNO, timeout = 20, default = True)
+		self.session.openWithCallback(self.backupusb, MessageBox, _("Do you want to make a backup on USB?\n\nThis only takes a few minutes depending on the used filesystem and is fully automatic.\n\nMake sure you first insert an USB flash drive before you select Yes."), MessageBox.TYPE_YESNO, timeout=20, default=True)
 
 	def confirmmmc(self):
-		self.session.openWithCallback(self.backupmmc, MessageBox, _("Do you want to make an USB-backup image on MMC? \n\nThis only takes a few minutes and is fully automatic.\n"), MessageBox.TYPE_YESNO, timeout = 20, default = True)
+		self.session.openWithCallback(self.backupmmc, MessageBox, _("Do you want to make an USB-backup image on MMC? \n\nThis only takes a few minutes and is fully automatic.\n"), MessageBox.TYPE_YESNO, timeout=20, default=True)
 
 	def showHelp(self):
 		from plugin import backupsuiteHelp
@@ -173,21 +173,21 @@ class BackupStart(Screen):
 		with open(ENIGMA2VERSIONFILE, 'wt') as f:
 			f.write(getEnigmaVersionString())
 
-	def backuphdd(self, ret = False ):
+	def backuphdd(self, ret=False ):
 		if (ret == True):
 			self.writeEnigma2VersionFile()
 			text = _('Full backup on HDD')
 			cmd = backupCommandHDD()
 			self.session.openWithCallback(self.consoleClosed, Console, text, [cmd])
 
-	def backupusb(self, ret = False ):
+	def backupusb(self, ret=False ):
 		if (ret == True):
 			self.writeEnigma2VersionFile()
 			text = _('Full backup to USB')
 			cmd = backupCommandUSB()
 			self.session.openWithCallback(self.consoleClosed, Console, text, [cmd])
 
-	def backupmmc(self, ret = False ):
+	def backupmmc(self, ret=False ):
 		if (ret == True):
 			self.writeEnigma2VersionFile()
 			text = _('Full backup on MMC')
@@ -379,7 +379,7 @@ class FlashImageConfig(Screen):
 					open_list = [
 						(_("Exit"), "exit"),
 					]
-				self.session.openWithCallback(self.Callbackflashing, MessageBox, text, simple = True, list = open_list)
+				self.session.openWithCallback(self.Callbackflashing, MessageBox, text, simple=True, list=open_list)
 
 	def Callbackflashing(self, ret):
 		if ret:
@@ -490,14 +490,14 @@ def Plugins(path,**kwargs):
 	return [
 		PluginDescriptor(
 		name=_("BackupSuite"),
-		description = _("Backup and restore your image") + ", " + versienummer,
-		where = PluginDescriptor.WHERE_PLUGINMENU,
-		icon = 'plugin.png',
-		fnc = main
+		description=_("Backup and restore your image") + ", " + versienummer,
+		where=PluginDescriptor.WHERE_PLUGINMENU,
+		icon='plugin.png',
+		fnc=main
 		),
 		PluginDescriptor(
-		name =_("BackupSuite"),
-		description = _("Backup and restore your image") + ", " + versienummer,
-		where = PluginDescriptor.WHERE_EXTENSIONSMENU,
-		fnc = main)
+		name=_("BackupSuite"),
+		description=_("Backup and restore your image") + ", " + versienummer,
+		where=PluginDescriptor.WHERE_EXTENSIONSMENU,
+		fnc=main)
 	]
