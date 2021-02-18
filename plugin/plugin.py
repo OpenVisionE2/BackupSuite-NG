@@ -173,21 +173,21 @@ class BackupStart(Screen):
 		with open(ENIGMA2VERSIONFILE, 'wt') as f:
 			f.write(getEnigmaVersionString())
 
-	def backuphdd(self, ret=False ):
+	def backuphdd(self, ret=False):
 		if (ret == True):
 			self.writeEnigma2VersionFile()
 			text = _('Full backup on HDD')
 			cmd = backupCommandHDD()
 			self.session.openWithCallback(self.consoleClosed, Console, text, [cmd])
 
-	def backupusb(self, ret=False ):
+	def backupusb(self, ret=False):
 		if (ret == True):
 			self.writeEnigma2VersionFile()
 			text = _('Full backup to USB')
 			cmd = backupCommandUSB()
 			self.session.openWithCallback(self.consoleClosed, Console, text, [cmd])
 
-	def backupmmc(self, ret=False ):
+	def backupmmc(self, ret=False):
 		if (ret == True):
 			self.writeEnigma2VersionFile()
 			text = _('Full backup on MMC')
