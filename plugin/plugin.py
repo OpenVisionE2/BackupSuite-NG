@@ -484,7 +484,7 @@ def main(session, **kwargs):
 	session.open(BackupStart)
 
 
-def Plugins(path,**kwargs):
+def Plugins(path, **kwargs):
 	global plugin_path
 	plugin_path = path
 	return [
