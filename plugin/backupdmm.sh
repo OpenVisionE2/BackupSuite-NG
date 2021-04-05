@@ -1,9 +1,9 @@
+#!/bin/sh
+
+###############################################################################
 #     FULL BACKUP UYILITY FOR ENIGMA2/OPENVISION, SUPPORTS VARIOUS MODELS     #
 #                    MAKES A FULLBACKUP READY FOR FLASHING.                   #
-#                                                                             #
 ###############################################################################
-#
-#!/bin/sh
 
 if [ -d "/usr/lib64" ]; then
 	echo "multilib situation!"
