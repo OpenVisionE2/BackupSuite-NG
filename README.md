@@ -2,7 +2,7 @@ BackupSuite [![Build Status](https://travis-ci.org/OpenVisionE2/BackupSuite.svg?
 ===========
 Created by Pedro Newbie revamped by Persian Prince
 
-Backup Suite (new generation) for Open Vision (won't work on other images)
+Backup Suite NG (New Generation) for Open Vision (won't work on other images)
 
 Ready bitbake recipe:
 
