@@ -19,12 +19,12 @@ from Components.Sources.StaticText import StaticText
 from Plugins.Plugin import PluginDescriptor
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from os import environ
-from enigma import getDesktop, getBoxType, getBoxBrand
-from boxbranding import getMachineBuild, getMachineRootFile, getMachineKernelFile
+from enigma import getDesktop
+from Components.SystemInfo import BoxInfo
 
-brand = getBoxBrand()
-rootfile = getMachineRootFile()
-kernelfile = getMachineKernelFile()
+brand = BoxInfo.getItem("brand")
+rootfile = BoxInfo.getItem("rootfile")
+kernelfile = BoxInfo.getItem("kernelfile")
 
 lang = language.getLanguage()
 environ["LANGUAGE"] = lang[:2]
@@ -277,7 +277,7 @@ class FlashImageConfig(Screen):
 		pass
 
 	def dualBoot(self):
-		if getBoxType() == "et8500":
+		if BoxInfo.getItem("model") == "et8500":
 			rootfs2 = False
 			kernel2 = False
 			f = open("/proc/mtd")
@@ -293,7 +293,7 @@ class FlashImageConfig(Screen):
 		return False
 
 	def ForceMode(self):
-		if getMachineBuild() in ("zgemmahisi3798mv200", "zgemmahisi3716mv430"):
+		if BoxInfo.getItem("platform") in ("zgemmahisi3798mv200", "zgemmahisi3716mv430"):
 			return True
 		return False
 
