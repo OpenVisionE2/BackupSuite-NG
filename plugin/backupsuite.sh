@@ -192,36 +192,8 @@ if [ -f /etc/modules-load.d/*dreambox-dvb-modules*.conf ] ; then
 	log "It's a dreambox! Not compatible with this script."
 	exit 1
 else
-	if [ -f /etc/openvision/model ] ; then
-		log "Thanks GOD it's Open Vision"
-		SEARCH=$( cat /etc/openvision/model )
-		log "Model: $SEARCH"
-		PLATFORM=$( cat /etc/openvision/platform )
-		log "Platform: $PLATFORM"
-		KERNELNAME=$( cat /etc/openvision/kernelfile )
-		log "Kernel file: $KERNELNAME"
-		MKUBIFS_ARGS=$( cat /etc/openvision/mkubifs )
-		log "MKUBIFS: $MKUBIFS_ARGS"
-		UBINIZE_ARGS=$( cat /etc/openvision/ubinize )
-		log "UBINIZE: $UBINIZE_ARGS"
-		ROOTNAME=$( cat /etc/openvision/rootfile )
-		log "Root file: $ROOTNAME"
-		ACTION=$( cat /etc/openvision/forcemode )
-		log "Force: $ACTION"
-		FOLDER=/$( cat /etc/openvision/imagedir )
-		log "Image folder: $FOLDER"
-		SHOWNAME=$( cat /etc/openvision/brand )
-		log "Brand: $SHOWNAME"
-		MTDPLACE=$( cat /etc/openvision/mtdkernel )
-		log "MTD kernel: $MTDPLACE"
-		ARCHITECTURE=$( cat /etc/openvision/architecture )
-		log "Architecture: $ARCHITECTURE"
-		SHORTARCH=$( echo "$ARCHITECTURE" | cut -c1-3 )
-		SOCFAMILY=$( cat /etc/openvision/socfamily )
-		log "SoC family: $SOCFAMILY"
-		SHORTSOC=$( echo "$SOCFAMILY" | cut -c1-4 )
-	elif [ -f /proc/enigma/model ] ; then
-		log "Lets read enigma module"
+	if [ -f /proc/enigma/model ] ; then
+		log "Lets read enigma module proc entries"
 		SEARCH=$( cat /proc/enigma/model )
 		log "Model: $SEARCH"
 		PLATFORM=$( cat /proc/enigma/platform )
@@ -249,9 +221,38 @@ else
 		log "SoC family: $SOCFAMILY"
 		SHORTSOC=$( echo "$SOCFAMILY" | cut -c1-4 )
 	else
-		echo $RED
-		$SHOW "message01" 2>&1 | tee -a $LOGFILE # No supported receiver found!
-		big_fail
+		log "Multiboot situation? Lets read enigma.ko via modinfo -d"
+		if [ ! -f /tmp/backupsuite-enigma.txt ] ; then
+			find /lib/modules -type f -name "enigma.ko" -exec modinfo -d {} \; > /tmp/backupsuite-enigma.txt
+			sleep 0.1
+		fi
+		ENIGMAMODULEDUMP=/tmp/backupsuite-enigma.txt
+		SEARCH=$( cat $ENIGMAMODULEDUMP | grep "model" | sed '2d' | cut -d "=" -f 2- )
+		log "Model: $SEARCH"
+		PLATFORM=$( cat $ENIGMAMODULEDUMP | grep "platform" | cut -d "=" -f 2- )
+		log "Platform: $PLATFORM"
+		KERNELNAME=$( cat $ENIGMAMODULEDUMP | grep "kernelfile" | cut -d "=" -f 2- )
+		log "Kernel file: $KERNELNAME"
+		MKUBIFS_ARGS=$( cat $ENIGMAMODULEDUMP | grep "mkubifs" | cut -d "=" -f 2- )
+		log "MKUBIFS: $MKUBIFS_ARGS"
+		UBINIZE_ARGS=$( cat $ENIGMAMODULEDUMP | grep "ubinize" | cut -d "=" -f 2- )
+		log "UBINIZE: $UBINIZE_ARGS"
+		ROOTNAME=$( cat $ENIGMAMODULEDUMP | grep "rootfile" | cut -d "=" -f 2- )
+		log "Root file: $ROOTNAME"
+		ACTION=$( cat $ENIGMAMODULEDUMP | grep "forcemode" | cut -d "=" -f 2- )
+		log "Force: $ACTION"
+		FOLDER=$( cat $ENIGMAMODULEDUMP | grep "imagedir" | cut -d "=" -f 2- )
+		log "Image folder: $FOLDER"
+		SHOWNAME=$( cat $ENIGMAMODULEDUMP | grep "brand" | sed '2d' | cut -d "=" -f 2- )
+		log "Brand: $SHOWNAME"
+		MTDPLACE=$( cat $ENIGMAMODULEDUMP | grep "mtdkernel" | cut -d "=" -f 2- )
+		log "MTD kernel: $MTDPLACE"
+		ARCHITECTURE=$( cat $ENIGMAMODULEDUMP | grep "architecture" | cut -d "=" -f 2- )
+		log "Architecture: $ARCHITECTURE"
+		SHORTARCH=$( echo "$ARCHITECTURE" | cut -c1-3 )
+		SOCFAMILY=$( cat $ENIGMAMODULEDUMP | grep "socfamily" | cut -d "=" -f 2- )
+		log "SoC family: $SOCFAMILY"
+		SHORTSOC=$( echo "$SOCFAMILY" | cut -c1-4 )
 	fi
 fi
 
