@@ -15,7 +15,7 @@ fi
 if [ `mkdir -p /tmp/test && ls -e1 /tmp/test 2>/dev/null && echo Yes || echo No | cat` == "Yes" ]; then
 	VISIONVERSION="7"
 else
-	VISIONVERSION="9"
+	VISIONVERSION="11"
 fi
 
 if [ $VISIONVERSION == "7" ]; then
@@ -218,6 +218,34 @@ else
 		log "Architecture: $ARCHITECTURE"
 		SHORTARCH=$( echo "$ARCHITECTURE" | cut -c1-3 )
 		SOCFAMILY=$( cat /etc/openvision/socfamily )
+		log "SoC family: $SOCFAMILY"
+		SHORTSOC=$( echo "$SOCFAMILY" | cut -c1-4 )
+	elif [ -f /proc/enigma/model ] ; then
+		log "Lets read enigma module"
+		SEARCH=$( cat /proc/enigma/model )
+		log "Model: $SEARCH"
+		PLATFORM=$( cat /proc/enigma/platform )
+		log "Platform: $PLATFORM"
+		KERNELNAME=$( cat /proc/enigma/kernelfile )
+		log "Kernel file: $KERNELNAME"
+		MKUBIFS_ARGS=$( cat /proc/enigma/mkubifs )
+		log "MKUBIFS: $MKUBIFS_ARGS"
+		UBINIZE_ARGS=$( cat /proc/enigma/ubinize )
+		log "UBINIZE: $UBINIZE_ARGS"
+		ROOTNAME=$( cat /proc/enigma/rootfile )
+		log "Root file: $ROOTNAME"
+		ACTION=$( cat /proc/enigma/forcemode )
+		log "Force: $ACTION"
+		FOLDER=/$( cat /proc/enigma/imagedir )
+		log "Image folder: $FOLDER"
+		SHOWNAME=$( cat /proc/enigma/brand )
+		log "Brand: $SHOWNAME"
+		MTDPLACE=$( cat /proc/enigma/mtdkernel )
+		log "MTD kernel: $MTDPLACE"
+		ARCHITECTURE=$( cat /proc/enigma/architecture )
+		log "Architecture: $ARCHITECTURE"
+		SHORTARCH=$( echo "$ARCHITECTURE" | cut -c1-3 )
+		SOCFAMILY=$( cat /proc/enigma/socfamily )
 		log "SoC family: $SOCFAMILY"
 		SHORTSOC=$( echo "$SOCFAMILY" | cut -c1-4 )
 	else
