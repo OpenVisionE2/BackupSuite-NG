@@ -447,19 +447,22 @@ elif [ $ACTION = "yes" ] ; then
 	fi
 fi
 image_version > "$MAINDEST/imageversion"
+if [ -f /boot/initrd_run.bin ] ; then
+	cp -f /boot/initrd_run.bin "$MAINDEST/initrd_run.bin"
+fi
 if [ $PLATFORM = "zgemmahisi3798mv200" -o $PLATFORM = "zgemmahisi3716mv430" ] ; then
 	log "Zgemma HiSilicon found, we need to copy more files for flashing later!"
 	dd if=/dev/mtd0 of=$MAINDEST/fastboot.bin > /dev/null 2>&1
 	dd if=/dev/mtd1 of=$MAINDEST/bootargs.bin > /dev/null 2>&1
-	cp -r "$MAINDEST/fastboot.bin" "$MEDIA/zgemma/fastboot.bin" > /dev/null 2>&1
-	cp -r "$MAINDEST/bootargs.bin" "$MEDIA/zgemma/bootargs.bin" > /dev/null 2>&1
+	cp -fr "$MAINDEST/fastboot.bin" "$MEDIA/zgemma/fastboot.bin" > /dev/null 2>&1
+	cp -fr "$MAINDEST/bootargs.bin" "$MEDIA/zgemma/bootargs.bin" > /dev/null 2>&1
 	dd if=/dev/mtd2 of=$MAINDEST/baseparam.bin > /dev/null 2>&1
 	dd if=/dev/mtd3 of=$MAINDEST/pq_param.bin > /dev/null 2>&1
 fi
 if  [ $HARDDISK != 1 ]; then
 	mkdir -p "$EXTRA"
 	echo "Created directory  = $EXTRA" >> $LOGFILE
-	cp -r "$MAINDEST" "$EXTRA" 	#copy the made backup to images
+	cp -fr "$MAINDEST" "$EXTRA" 	#copy the made backup to images
 fi
 if [ -f "$MAINDEST/$ROOTNAME" -a -f "$MAINDEST/$KERNELNAME" ] ; then
 		backup_made
@@ -488,7 +491,7 @@ if  [ $HARDDISK = 1 ]; then						# looking for a valid usb-stick
 		} 2>&1 | tee -a $LOGFILE
 		rm -rf "$TARGET$FOLDER"
 		mkdir -p "$TARGET$FOLDER"
-		cp -r "$MAINDEST/." "$TARGET$FOLDER"
+		cp -fr "$MAINDEST/." "$TARGET$FOLDER"
 		echo $LINE >> $LOGFILE
 		echo "MADE AN EXTRA COPY IN: $TARGET" >> $LOGFILE
 		df -h "$TARGET"  >> $LOGFILE

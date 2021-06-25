@@ -382,7 +382,7 @@ image_version > "$MAINDEST/imageversion"
 if  [ $HARDDISK != 1 ]; then
 	mkdir -p "$EXTRA"
 	echo "Created directory  = $EXTRA" >> $LOGFILE
-	cp -r "$MAINDEST" "$EXTRA" 	#copy the made backup to images
+	cp -fr "$MAINDEST" "$EXTRA" 	#copy the made backup to images
 fi
 if [ -f "$MAINDEST/$ROOTNAME" -a -f "$MAINDEST/$KERNELNAME" ] ; then
 		backup_made
@@ -410,7 +410,7 @@ if  [ $HARDDISK = 1 ]; then						# looking for a valid usb-stick
 		} 2>&1 | tee -a $LOGFILE
 		rm -rf "$TARGET$FOLDER"
 		mkdir -p "$TARGET$FOLDER"
-		cp -r "$MAINDEST/." "$TARGET$FOLDER"
+		cp -fr "$MAINDEST/." "$TARGET$FOLDER"
 		echo $LINE >> $LOGFILE
 		echo "MADE AN EXTRA COPY IN: $TARGET" >> $LOGFILE
 		df -h "$TARGET"  >> $LOGFILE
@@ -542,7 +542,7 @@ image_version > "$MAINDEST/imageversion"
 if  [ $HARDDISK != 1 ]; then
 	mkdir -p "$EXTRA"
 	echo "Created directory  = $EXTRA" >> $LOGFILE
-	cp -r "$MAINDEST" "$EXTRA" 	#copy the made backup to images
+	cp -fr "$MAINDEST" "$EXTRA" 	#copy the made backup to images
 fi
 backup_made
 $SHOW "message14" 			# Instructions on how to restore the image.
@@ -566,7 +566,7 @@ if  [ $HARDDISK = 1 ]; then						# looking for a valid usb-stick
 		} 2>&1 | tee -a $LOGFILE
 		rm -rf "$TARGET$FOLDER"
 		mkdir -p "$TARGET$FOLDER"
-		cp -r "$MAINDEST/." "$TARGET$FOLDER"
+		cp -fr "$MAINDEST/." "$TARGET$FOLDER"
 		echo $LINE >> $LOGFILE
 		echo "MADE AN EXTRA COPY IN: $TARGET" >> $LOGFILE
 		df -h "$TARGET"  >> $LOGFILE
@@ -893,7 +893,7 @@ log "$(du -h $NFI)"
 if [ -z "$CREATE_ZIP" ] ; then
    mkdir -p "$EXTRA"
    touch "$NFI/$IMVER"
-   cp -r "$NFI" "$EXTRA"
+   cp -fr "$NFI" "$EXTRA"
    touch "$MEDIA/fullbackup/.timestamp"
 else
    if [ $CREATE_ZIP != "none" ] ; then
