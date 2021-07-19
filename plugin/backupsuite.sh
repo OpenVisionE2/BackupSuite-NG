@@ -450,6 +450,9 @@ image_version > "$MAINDEST/imageversion"
 if [ -f /boot/initrd_run.bin ] ; then
 	cp -f /boot/initrd_run.bin "$MAINDEST/initrd_run.bin"
 fi
+if [ -f /usr/share/enigma2/receiver/burn.bat ] ; then
+	cp -f /usr/share/enigma2/receiver/burn.bat "$MAINDEST/burn.bat"
+fi
 if [ $PLATFORM = "zgemmahisi3798mv200" -o $PLATFORM = "zgemmahisi3716mv430" ] ; then
 	log "Zgemma HiSilicon found, we need to copy more files for flashing later!"
 	dd if=/dev/mtd0 of=$MAINDEST/fastboot.bin > /dev/null 2>&1
