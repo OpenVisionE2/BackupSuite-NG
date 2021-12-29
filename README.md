@@ -1,5 +1,5 @@
-BackupSuite [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-===========
+BackupSuite-NG [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+==============
 Created by Pedro Newbie revamped by Persian Prince
 
 Backup Suite NG (New Generation) for Open Vision (requires enigma kernel module to work on other images)
