@@ -201,59 +201,32 @@ checkbinary $UBINIZE
 echo -n $WHITE
 #############################################################################
 # TEST IF RECEIVER IS SUPPORTED #
-if [ -f /etc/modules-load.d/*dreambox-dvb-modules*.conf ] ; then
-	if [ -f /proc/enigma/model ] ; then
-		log "Lets read enigma module proc entries"
-		SEARCH=$( cat /proc/enigma/model )
-		log "Model: $SEARCH"
-		PLATFORM=$( cat /proc/enigma/platform )
-		log "Platform: $PLATFORM"
-		KERNELNAME=$( cat /proc/enigma/kernelfile )
-		log "Kernel file: $KERNELNAME"
-		MKUBIFS_ARGS=$( cat /proc/enigma/mkubifs )
-		log "MKUBIFS: $MKUBIFS_ARGS"
-		UBINIZE_ARGS=$( cat /proc/enigma/ubinize )
-		log "UBINIZE: $UBINIZE_ARGS"
-		ROOTNAME=$( cat /proc/enigma/rootfile )
-		log "Root file: $ROOTNAME"
-		FOLDER=/$( cat /proc/enigma/imagedir )
-		log "Image folder: $FOLDER"
-		SHOWNAME=$( cat /proc/enigma/brand )
-		log "Brand: $SHOWNAME"
-		MTDPLACE=$( cat /proc/enigma/mtdkernel )
-		log "MTD kernel: $MTDPLACE"
-		ARCHITECTURE=$( cat /proc/enigma/architecture )
-		log "Architecture: $ARCHITECTURE"
-		SHORTARCH=$( echo "$ARCHITECTURE" | cut -c1-3 )
-	else
-		log "Multiboot situation? Lets read enigma.ko via modinfo -d"
-		if [ ! -f /tmp/backupsuite-enigma.txt ] ; then
-			find /lib/modules -type f -name "enigma.ko" -exec modinfo -d {} \; > /tmp/backupsuite-enigma.txt
-			sleep 0.1
-		fi
-		ENIGMAMODULEDUMP=/tmp/backupsuite-enigma.txt
-		SEARCH=$( cat $ENIGMAMODULEDUMP | grep "model" | sed '2d' | cut -d "=" -f 2- )
-		log "Model: $SEARCH"
-		PLATFORM=$( cat $ENIGMAMODULEDUMP | grep "platform" | cut -d "=" -f 2- )
-		log "Platform: $PLATFORM"
-		KERNELNAME=$( cat $ENIGMAMODULEDUMP | grep "kernelfile" | cut -d "=" -f 2- )
-		log "Kernel file: $KERNELNAME"
-		MKUBIFS_ARGS=$( cat $ENIGMAMODULEDUMP | grep "mkubifs" | cut -d "=" -f 2- )
-		log "MKUBIFS: $MKUBIFS_ARGS"
-		UBINIZE_ARGS=$( cat $ENIGMAMODULEDUMP | grep "ubinize" | cut -d "=" -f 2- )
-		log "UBINIZE: $UBINIZE_ARGS"
-		ROOTNAME=$( cat $ENIGMAMODULEDUMP | grep "rootfile" | cut -d "=" -f 2- )
-		log "Root file: $ROOTNAME"
-		FOLDER=$( cat $ENIGMAMODULEDUMP | grep "imagedir" | cut -d "=" -f 2- )
-		log "Image folder: $FOLDER"
-		SHOWNAME=$( cat $ENIGMAMODULEDUMP | grep "brand" | sed '2d' | cut -d "=" -f 2- )
-		log "Brand: $SHOWNAME"
-		MTDPLACE=$( cat $ENIGMAMODULEDUMP | grep "mtdkernel" | cut -d "=" -f 2- )
-		log "MTD kernel: $MTDPLACE"
-		ARCHITECTURE=$( cat $ENIGMAMODULEDUMP | grep "architecture" | cut -d "=" -f 2- )
-		log "Architecture: $ARCHITECTURE"
-		SHORTARCH=$( echo "$ARCHITECTURE" | cut -c1-3 )
-	fi
+if ls /etc/modules-load.d/*dreambox-dvb-modules*.conf >/dev/null 2>&1 ; then
+	log "Lets read enigma module proc entries"
+	ENIGMAMODULEDUMP=/tmp/backupsuite-enigma.txt
+	find /lib/modules -type f -name "enigma.ko" -exec modinfo -d {} \; > $ENIGMAMODULEDUMP
+	sleep 0.1
+	SEARCH=$( cat $ENIGMAMODULEDUMP | grep "model" | sed '2d' | cut -d "=" -f 2- )
+	log "Model: $SEARCH"
+	PLATFORM=$( cat $ENIGMAMODULEDUMP | grep "platform" | cut -d "=" -f 2- )
+	log "Platform: $PLATFORM"
+	KERNELNAME=$( cat $ENIGMAMODULEDUMP | grep "kernelfile" | cut -d "=" -f 2- )
+	log "Kernel file: $KERNELNAME"
+	MKUBIFS_ARGS=$( cat $ENIGMAMODULEDUMP | grep "mkubifs" | cut -d "=" -f 2- )
+	log "MKUBIFS: $MKUBIFS_ARGS"
+	UBINIZE_ARGS=$( cat $ENIGMAMODULEDUMP | grep "ubinize" | cut -d "=" -f 2- )
+	log "UBINIZE: $UBINIZE_ARGS"
+	ROOTNAME=$( cat $ENIGMAMODULEDUMP | grep "rootfile" | cut -d "=" -f 2- )
+	log "Root file: $ROOTNAME"
+	FOLDER=$( cat $ENIGMAMODULEDUMP | grep "imagedir" | cut -d "=" -f 2- )
+	log "Image folder: $FOLDER"
+	SHOWNAME=$( cat $ENIGMAMODULEDUMP | grep "brand" | sed '2d' | cut -d "=" -f 2- )
+	log "Brand: $SHOWNAME"
+	MTDPLACE=$( cat $ENIGMAMODULEDUMP | grep "mtdkernel" | cut -d "=" -f 2- )
+	log "MTD kernel: $MTDPLACE"
+	ARCHITECTURE=$( cat $ENIGMAMODULEDUMP | grep "architecture" | cut -d "=" -f 2- )
+	log "Architecture: $ARCHITECTURE"
+	SHORTARCH=$( echo "$ARCHITECTURE" | cut -c1-3 )
 else
 	log "It's not a dreambox! Not compatible with this script."
 	exit 1
