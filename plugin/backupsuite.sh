@@ -192,7 +192,7 @@ if [ -f /etc/modules-load.d/*dreambox-dvb-modules*.conf ] ; then
 	log "It's a dreambox! Not compatible with this script."
 	exit 1
 else
-	if [ -f /proc/enigma/model ] ; then
+	if [ -f /proc/enigma/model ] && [ -s /proc/enigma/model ] ; then
 		log "Lets read enigma module proc entries"
 		SEARCH=$( cat /proc/enigma/model )
 		log "Model: $SEARCH"

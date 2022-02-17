@@ -202,7 +202,7 @@ echo -n $WHITE
 #############################################################################
 # TEST IF RECEIVER IS SUPPORTED #
 if [ -f /etc/modules-load.d/*dreambox-dvb-modules*.conf ] ; then
-	if [ -f /proc/enigma/model ] ; then
+	if [ -f /proc/enigma/model ] && [ -s /proc/enigma/model ] ; then
 		log "Lets read enigma module proc entries"
 		SEARCH=$( cat /proc/enigma/model )
 		log "Model: $SEARCH"
