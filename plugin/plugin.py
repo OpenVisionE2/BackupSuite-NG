@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from __future__ import print_function
-from schermen import *
+from .schermen import *
 import os
 import gettext
 import enigma
@@ -157,7 +157,7 @@ class BackupStart(Screen):
 		self.session.openWithCallback(self.backupmmc, MessageBox, _("Do you want to make an USB-backup image on MMC? \n\nThis only takes a few minutes and is fully automatic.\n"), MessageBox.TYPE_YESNO, timeout=20, default=True)
 
 	def showHelp(self):
-		from plugin import backupsuiteHelp
+		from .plugin import backupsuiteHelp
 		if backupsuiteHelp:
 			backupsuiteHelp.open(self.session)
 
