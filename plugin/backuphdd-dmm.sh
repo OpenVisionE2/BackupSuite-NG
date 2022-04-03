@@ -23,8 +23,17 @@ else
 	LIBDIR="/usr/lib"
 fi
 
+PY_BIN="$(which python)"
+if [ -f "$PY_BIN" ]; then
+	PY_EXT="pyo"
+else
+	PY_EXT='pyc'
+	PY_BIN="$(which python3)"
+fi
+echo "$($PY_BIN -V) detected!"
+
 export LANG=$1
-export SHOW="python $LIBDIR/enigma2/python/Plugins/Extensions/BackupSuite/message.pyo $LANG"
+export SHOW="$PY_BIN $LIBDIR/enigma2/python/Plugins/Extensions/BackupSuite/message.$PY_EXT $LANG"
 export HARDDISK=1
 echo -n $YELLOW
 $SHOW "message20"   	#echo "Full backup to the harddisk"

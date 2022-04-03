@@ -12,6 +12,12 @@ else
 	LIBDIR="/usr/lib"
 fi
 
+PY_BIN="$(which python)"
+if [ ! -f "$PY_BIN" ]; then
+	PY_BIN="$(which python3)"
+fi
+echo "$($PY_BIN -V) detected!"
+
 if [ `mkdir -p /tmp/test && ls -e1 /tmp/test 2>/dev/null && echo Yes || echo No | cat` == "Yes" ]; then
 	VISIONVERSION="7"
 else
@@ -793,7 +799,7 @@ fi
 #
 # Trim 0xFFFFFF from secondstage
 #
-/usr/bin/python -c "
+$PY_BIN -c "
 data=open('$SECSTAGE', 'rb').read()
 cutoff=data.find('\xff\xff\xff\xff')
 if cutoff:

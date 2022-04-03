@@ -23,9 +23,18 @@ else
 	LIBDIR="/usr/lib"
 fi
 
+PY_BIN="$(which python)"
+if [ -f "$PY_BIN" ]; then
+	PY_EXT="pyo"
+else
+	PY_EXT='pyc'
+	PY_BIN="$(which python3)"
+fi
+echo "$($PY_BIN -V) detected!"
+
 export LANG=$1
 export HARDDISK=0
-export SHOW="python $LIBDIR/enigma2/python/Plugins/Extensions/BackupSuite/message.pyo $LANG"
+export SHOW="$PY_BIN $LIBDIR/enigma2/python/Plugins/Extensions/BackupSuite/message.$PY_EXT $LANG"
 TARGET="XX"
 USEDSIZE=`df -k /usr/ | grep [0-9]% | tr -s " " | cut -d " " -f 3` # size of rootfs
 NEEDEDSPACE=$(((4*$USEDSIZE)/1024))
