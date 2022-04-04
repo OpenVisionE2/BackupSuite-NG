@@ -202,7 +202,7 @@ checkbinary $UBINIZE
 echo -n $WHITE
 #############################################################################
 # TEST IF RECEIVER IS SUPPORTED #
-if [ -f /etc/modules-load.d/*dreambox-dvb-modules*.conf ] ; then
+if ls /etc/modules-load.d/*dreambox-dvb-modules*.conf >/dev/null 2>&1 ; then
 	if [ -f /proc/enigma/model ] && [ -s /proc/enigma/model ] ; then
 		log "Lets read enigma module proc entries"
 		SEARCH=$( cat /proc/enigma/model )
