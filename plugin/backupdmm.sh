@@ -245,7 +245,7 @@ if ls /etc/modules-load.d/*dreambox-dvb-modules*.conf >/dev/null 2>&1 ; then
 		log "UBINIZE: $UBINIZE_ARGS"
 		ROOTNAME=$( cat $ENIGMAMODULEDUMP | grep "rootfile" | cut -d "=" -f 2- )
 		log "Root file: $ROOTNAME"
-		FOLDER=$( cat $ENIGMAMODULEDUMP | grep "imagedir" | cut -d "=" -f 2- )
+		FOLDER=/$( cat $ENIGMAMODULEDUMP | grep "imagedir" | cut -d "=" -f 2- )
 		log "Image folder: $FOLDER"
 		SHOWNAME=$( cat $ENIGMAMODULEDUMP | grep "brand" | sed '2d' | cut -d "=" -f 2- )
 		log "Brand: $SHOWNAME"

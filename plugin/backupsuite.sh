@@ -242,7 +242,7 @@ else
 		log "Root file: $ROOTNAME"
 		ACTION=$( cat $ENIGMAMODULEDUMP | grep "forcemode" | cut -d "=" -f 2- )
 		log "Force: $ACTION"
-		FOLDER=$( cat $ENIGMAMODULEDUMP | grep "imagedir" | cut -d "=" -f 2- )
+		FOLDER=/$( cat $ENIGMAMODULEDUMP | grep "imagedir" | cut -d "=" -f 2- )
 		log "Image folder: $FOLDER"
 		SHOWNAME=$( cat $ENIGMAMODULEDUMP | grep "brand" | sed '2d' | cut -d "=" -f 2- )
 		log "Brand: $SHOWNAME"
