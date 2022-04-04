@@ -23,9 +23,19 @@ else
 	LIBDIR="/usr/lib"
 fi
 
+if `python -V &> /dev/null`; then
+	export PY_BIN="$(which python)"
+	PY_EXT="pyo"
+else
+	export PY_BIN="$(which python3)"
+	PY_EXT="pyc"
+fi
+export PY_VER=`$PY_BIN -c 'import platform; print(platform.python_version())'`
+echo "Python $PY_VER detected!"
+
 export LANG=$1
 export HARDDISK=0
-export SHOW="python $LIBDIR/enigma2/python/Plugins/Extensions/BackupSuite/message.pyo $LANG"
+export SHOW="$PY_BIN $LIBDIR/enigma2/python/Plugins/Extensions/BackupSuite/message.$PY_EXT $LANG"
 TARGET="XX"
 USEDSIZE=`df -k /usr/ | grep [0-9]% | tr -s " " | cut -d " " -f 3` # size of rootfs
 NEEDEDSPACE=$(((4*$USEDSIZE)/1024))

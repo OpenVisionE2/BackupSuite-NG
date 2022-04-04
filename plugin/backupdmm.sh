@@ -188,6 +188,7 @@ log "*** THIS BACKUP IS CREATED WITH THE BACKUPSUITE PLUGIN ***"
 log "*****  https://github.com/OpenVisionE2/BackupSuite  ******"
 log $LINE
 log "Plugin version     = "`cat /var/lib/opkg/info/enigma2-plugin-extensions-backupsuite.control | grep "Version: " | cut -d "+" -f 2- | cut -d "-" -f1`
+log "Python version     = $PY_VER"
 log "Backup media      = $MEDIA"
 df -h "$MEDIA"  >> $LOGFILE
 log $LINE
@@ -793,7 +794,7 @@ fi
 #
 # Trim 0xFFFFFF from secondstage
 #
-/usr/bin/python -c "
+$PY_BIN -c "
 data=open('$SECSTAGE', 'rb').read()
 cutoff=data.find('\xff\xff\xff\xff')
 if cutoff:

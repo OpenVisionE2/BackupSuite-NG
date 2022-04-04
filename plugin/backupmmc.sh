@@ -23,8 +23,18 @@ else
 	LIBDIR="/usr/lib"
 fi
 
+if `python -V &> /dev/null`; then
+	export PY_BIN="$(which python)"
+	PY_EXT="pyo"
+else
+	export PY_BIN="$(which python3)"
+	PY_EXT="pyc"
+fi
+export PY_VER=`$PY_BIN -c 'import platform; print(platform.python_version())'`
+echo "Python $PY_VER detected!"
+
 export LANG=$1
-export SHOW="python $LIBDIR/enigma2/python/Plugins/Extensions/BackupSuite/message.pyo $LANG"
+export SHOW="$PY_BIN $LIBDIR/enigma2/python/Plugins/Extensions/BackupSuite/message.$PY_EXT $LANG"
 export HARDDISK=0
 echo -n $YELLOW
 $SHOW "message43"   	#echo "Full backup to the MultiMediaCard"
