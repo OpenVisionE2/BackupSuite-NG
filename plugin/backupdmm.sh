@@ -15,7 +15,7 @@ fi
 if [ `mkdir -p /tmp/test && ls -e1 /tmp/test 2>/dev/null && echo Yes || echo No | cat` == "Yes" ]; then
 	VISIONVERSION="7"
 else
-	VISIONVERSION="11"
+	VISIONVERSION="12"
 fi
 
 if [ $VISIONVERSION == "7" ]; then
