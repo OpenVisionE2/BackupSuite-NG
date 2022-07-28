@@ -23,14 +23,14 @@ else
 	LIBDIR="/usr/lib"
 fi
 
-if `python -V &> /dev/null`; then
+export PY_VER=`cat /etc/openvision/python`
+if [ ${PY_VER::1} == 2 ]; then
 	export PY_BIN="$(which python)"
 	PY_EXT="pyo"
 else
 	export PY_BIN="$(which python3)"
 	PY_EXT="pyc"
 fi
-export PY_VER=`$PY_BIN -c 'import platform; print(platform.python_version())'`
 echo "Python $PY_VER detected!"
 
 export LANG=$1
