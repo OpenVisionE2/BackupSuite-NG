@@ -499,14 +499,14 @@ def Plugins(path, **kwargs):
 	return [
 		PluginDescriptor(
 		name=_("BackupSuite"),
-		description=_("Backup and restore your image") + ", " + versionnumber,
+		description=_("Backup and restore your image") + " git-" + versionnumber,
 		where=PluginDescriptor.WHERE_PLUGINMENU,
 		icon='plugin.png',
 		fnc=main
 		),
 		PluginDescriptor(
 		name=_("BackupSuite"),
-		description=_("Backup and restore your image") + ", " + versionnumber,
+		description=_("Backup and restore your image") + " git-" + versionnumber,
 		where=PluginDescriptor.WHERE_EXTENSIONSMENU,
 		fnc=main)
 	]
