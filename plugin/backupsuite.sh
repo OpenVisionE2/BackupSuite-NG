@@ -193,36 +193,37 @@ if ls /etc/modules-load.d/*dreambox-dvb-modules*.conf >/dev/null 2>&1 ; then
 	log "It's a dreambox! Not compatible with this script."
 	exit 1
 else
-	if [ -f /proc/enigma/model ] && [ -s /proc/enigma/model ] ; then
-		log "Lets read enigma module proc entries"
-		SEARCH=$( cat /proc/enigma/model )
+	if [ -f /usr/lib/enigma.info ] ; then
+		log "Lets read /usr/lib/enigma.info"
+		ENIGMAMODULEDUMP=/usr/lib/enigma.info
+		SEARCH=$( cat $ENIGMAMODULEDUMP | grep "model" | sed '2d' | cut -d "=" -f 2- )
 		log "Model: $SEARCH"
-		PLATFORM=$( cat /proc/enigma/platform )
+		PLATFORM=$( cat $ENIGMAMODULEDUMP | grep "platform" | cut -d "=" -f 2- )
 		log "Platform: $PLATFORM"
-		KERNELNAME=$( cat /proc/enigma/kernelfile )
+		KERNELNAME=$( cat $ENIGMAMODULEDUMP | grep "kernelfile" | cut -d "=" -f 2- )
 		log "Kernel file: $KERNELNAME"
-		MKUBIFS_ARGS=$( cat /proc/enigma/mkubifs )
+		MKUBIFS_ARGS=$( cat $ENIGMAMODULEDUMP | grep "mkubifs" | cut -d "=" -f 2- )
 		log "MKUBIFS: $MKUBIFS_ARGS"
-		UBINIZE_ARGS=$( cat /proc/enigma/ubinize )
+		UBINIZE_ARGS=$( cat $ENIGMAMODULEDUMP | grep "ubinize" | cut -d "=" -f 2- )
 		log "UBINIZE: $UBINIZE_ARGS"
-		ROOTNAME=$( cat /proc/enigma/rootfile )
+		ROOTNAME=$( cat $ENIGMAMODULEDUMP | grep "rootfile" | cut -d "=" -f 2- )
 		log "Root file: $ROOTNAME"
-		ACTION=$( cat /proc/enigma/forcemode )
+		ACTION=$( cat $ENIGMAMODULEDUMP | grep "forcemode" | cut -d "=" -f 2- )
 		log "Force: $ACTION"
-		FOLDER=/$( cat /proc/enigma/imagedir )
+		FOLDER=/$( cat $ENIGMAMODULEDUMP | grep "imagedir" | cut -d "=" -f 2- )
 		log "Image folder: $FOLDER"
-		SHOWNAME=$( cat /proc/enigma/brand )
+		SHOWNAME=$( cat $ENIGMAMODULEDUMP | grep "brand" | sed '2d' | cut -d "=" -f 2- )
 		log "Brand: $SHOWNAME"
-		MTDPLACE=$( cat /proc/enigma/mtdkernel )
+		MTDPLACE=$( cat $ENIGMAMODULEDUMP | grep "mtdkernel" | cut -d "=" -f 2- )
 		log "MTD kernel: $MTDPLACE"
-		ARCHITECTURE=$( cat /proc/enigma/architecture )
+		ARCHITECTURE=$( cat $ENIGMAMODULEDUMP | grep "architecture" | cut -d "=" -f 2- )
 		log "Architecture: $ARCHITECTURE"
 		SHORTARCH=$( echo "$ARCHITECTURE" | cut -c1-3 )
-		SOCFAMILY=$( cat /proc/enigma/socfamily )
+		SOCFAMILY=$( cat $ENIGMAMODULEDUMP | grep "socfamily" | cut -d "=" -f 2- )
 		log "SoC family: $SOCFAMILY"
 		SHORTSOC=$( echo "$SOCFAMILY" | cut -c1-4 )
 	else
-		log "Multiboot situation? Lets read enigma.ko via modinfo -d"
+		log "Lets read enigma.ko via modinfo -d"
 		if [ ! -f /tmp/backupsuite-enigma.txt ] ; then
 			find /lib/modules -type f -name "enigma.ko" -exec modinfo -d {} \; > /tmp/backupsuite-enigma.txt
 			sleep 0.1
