@@ -317,19 +317,18 @@ $SHOW "message03"  ; printf "%d.%02d " $ESTMINUTES $ESTSECONDS ; $SHOW "message2
 echo $LINE
 } 2>&1 | tee -a $LOGFILE
 ####### WARNING IF THE IMAGESIZE GETS TOO BIG TO RESTORE ########
-if [ -f /etc/openvision/smallflash ] ; then
-	if [ $MEGABYTES -gt 62 ] ; then
-	echo -n $RED
-	$SHOW "message28" 2>&1 | tee -a $LOGFILE #Image probably too big to restore
-	echo $WHITE
+if echo "$ENIGMAMODULEDUMP" | grep -q "smallflash"; then
+	if [ $MEGABYTES -gt 60 ] ; then
+		echo -n $RED
+		$SHOW "message28" 2>&1 | tee -a $LOGFILE #Image probably too big to restore
+		echo $WHITE
 	fi
 fi
-
-if [ -f /etc/openvision/middleflash ] ; then
+if echo "$ENIGMAMODULEDUMP" | grep -q "middleflash"; then
 	if [ $MEGABYTES -gt 94 ] ; then
-	echo -n $RED
-	$SHOW "message28" 2>&1 | tee -a $LOGFILE #Image probably too big to restore
-	echo $WHITE
+		echo -n $RED
+		$SHOW "message28" 2>&1 | tee -a $LOGFILE #Image probably too big to restore
+		echo $WHITE
 	fi
 fi
 #=================================================================================
