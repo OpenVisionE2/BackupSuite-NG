@@ -23,15 +23,15 @@ else
 	LIBDIR="/usr/lib"
 fi
 
-export PY_VER=`cat /etc/openvision/python`
-if [ ${PY_VER::1} == 2 ]; then
-	export PY_BIN="$(which python)"
-	PY_EXT="pyo"
-else
+if [ -f /usr/bin/python3 ] ; then
+	echo "Python 3 detected!"
 	export PY_BIN="$(which python3)"
 	PY_EXT="pyc"
+else
+	echo "Python 2 detected!"
+	export PY_BIN="$(which python)"
+	PY_EXT="pyo"
 fi
-echo "Python $PY_VER detected!"
 
 export LANG=$1
 export SHOW="$PY_BIN $LIBDIR/enigma2/python/Plugins/Extensions/BackupSuite/message.$PY_EXT $LANG"
