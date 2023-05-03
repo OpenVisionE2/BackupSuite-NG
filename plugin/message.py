@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-from os import environ as os_environ, path as os_path
+from os import environ as os_environ
+from os.path import isdir
 import gettext
 import sys
 
-if os_path.isdir("/usr/lib64"):
+if isdir("/usr/lib64"):
 	BACKUPSUITE_LANGUAGE_PATH = "/usr/lib64/enigma2/python/Plugins/Extensions/BackupSuite/locale"
 else:
 	BACKUPSUITE_LANGUAGE_PATH = "/usr/lib/enigma2/python/Plugins/Extensions/BackupSuite/locale"
