@@ -203,31 +203,32 @@ echo -n $WHITE
 #############################################################################
 # TEST IF RECEIVER IS SUPPORTED #
 if ls /etc/modules-load.d/*dreambox-dvb-modules*.conf >/dev/null 2>&1 ; then
-	if [ -f /proc/enigma/model ] && [ -s /proc/enigma/model ] ; then
-		log "Lets read enigma module proc entries"
-		SEARCH=$( cat /proc/enigma/model )
+	if [ -f /usr/lib/enigma.info ] ; then
+		log "Lets read /usr/lib/enigma.info"
+		ENIGMAMODULEDUMP=/usr/lib/enigma.info
+		SEARCH=$( cat $ENIGMAMODULEDUMP | grep "model" | sed '2d' | cut -d "=" -f 2- )
 		log "Model: $SEARCH"
-		PLATFORM=$( cat /proc/enigma/platform )
+		PLATFORM=$( cat $ENIGMAMODULEDUMP | grep "platform" | cut -d "=" -f 2- )
 		log "Platform: $PLATFORM"
-		KERNELNAME=$( cat /proc/enigma/kernelfile )
+		KERNELNAME=$( cat $ENIGMAMODULEDUMP | grep "kernelfile" | cut -d "=" -f 2- )
 		log "Kernel file: $KERNELNAME"
-		MKUBIFS_ARGS=$( cat /proc/enigma/mkubifs )
+		MKUBIFS_ARGS=$( cat $ENIGMAMODULEDUMP | grep "mkubifs" | cut -d "=" -f 2- )
 		log "MKUBIFS: $MKUBIFS_ARGS"
-		UBINIZE_ARGS=$( cat /proc/enigma/ubinize )
+		UBINIZE_ARGS=$( cat $ENIGMAMODULEDUMP | grep "ubinize" | cut -d "=" -f 2- )
 		log "UBINIZE: $UBINIZE_ARGS"
-		ROOTNAME=$( cat /proc/enigma/rootfile )
+		ROOTNAME=$( cat $ENIGMAMODULEDUMP | grep "rootfile" | cut -d "=" -f 2- )
 		log "Root file: $ROOTNAME"
-		FOLDER=/$( cat /proc/enigma/imagedir )
+		FOLDER=/$( cat $ENIGMAMODULEDUMP | grep "imagedir" | cut -d "=" -f 2- )
 		log "Image folder: $FOLDER"
-		SHOWNAME=$( cat /proc/enigma/brand )
+		SHOWNAME=$( cat $ENIGMAMODULEDUMP | grep "brand" | sed '2d' | cut -d "=" -f 2- )
 		log "Brand: $SHOWNAME"
-		MTDPLACE=$( cat /proc/enigma/mtdkernel )
+		MTDPLACE=$( cat $ENIGMAMODULEDUMP | grep "mtdkernel" | cut -d "=" -f 2- )
 		log "MTD kernel: $MTDPLACE"
-		ARCHITECTURE=$( cat /proc/enigma/architecture )
+		ARCHITECTURE=$( cat $ENIGMAMODULEDUMP | grep "architecture" | cut -d "=" -f 2- )
 		log "Architecture: $ARCHITECTURE"
 		SHORTARCH=$( echo "$ARCHITECTURE" | cut -c1-3 )
 	else
-		log "Multiboot situation? Lets read enigma.ko via modinfo -d"
+		log "Lets read enigma.ko via modinfo -d"
 		if [ ! -f /tmp/backupsuite-enigma.txt ] ; then
 			find /lib/modules -type f -name "enigma.ko" -exec modinfo -d {} \; > /tmp/backupsuite-enigma.txt
 			sleep 0.1
@@ -316,19 +317,18 @@ $SHOW "message03"  ; printf "%d.%02d " $ESTMINUTES $ESTSECONDS ; $SHOW "message2
 echo $LINE
 } 2>&1 | tee -a $LOGFILE
 ####### WARNING IF THE IMAGESIZE GETS TOO BIG TO RESTORE ########
-if [ -f /etc/openvision/smallflash ] ; then
-	if [ $MEGABYTES -gt 62 ] ; then
-	echo -n $RED
-	$SHOW "message28" 2>&1 | tee -a $LOGFILE #Image probably too big to restore
-	echo $WHITE
+if echo "$ENIGMAMODULEDUMP" | grep -q "smallflash"; then
+	if [ $MEGABYTES -gt 60 ] ; then
+		echo -n $RED
+		$SHOW "message28" 2>&1 | tee -a $LOGFILE #Image probably too big to restore
+		echo $WHITE
 	fi
 fi
-
-if [ -f /etc/openvision/middleflash ] ; then
+if echo "$ENIGMAMODULEDUMP" | grep -q "middleflash"; then
 	if [ $MEGABYTES -gt 94 ] ; then
-	echo -n $RED
-	$SHOW "message28" 2>&1 | tee -a $LOGFILE #Image probably too big to restore
-	echo $WHITE
+		echo -n $RED
+		$SHOW "message28" 2>&1 | tee -a $LOGFILE #Image probably too big to restore
+		echo $WHITE
 	fi
 fi
 #=================================================================================
